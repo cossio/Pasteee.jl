@@ -5,7 +5,7 @@
 import Pasteee
 
 #=
-To access the Pasteee API, you need an Application Key.
+To access the Paste.ee API, you need an Application Key.
 You can create yours at the following link:
 <https://paste.ee/account/api>
 (after logging in to [Paste.ee](https://paste.ee/))
