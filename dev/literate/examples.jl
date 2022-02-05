@@ -16,18 +16,18 @@ You will see the Application Key.
 
 #=
 In the following examples I assume that you have assigned your
-Application Key to the `KEY` variable.
+Application Key to the `appkey` variable.
 =#
 
-const KEY = ENV["PASTEEE_APPKEY"]; nothing #hide
+const appkey = ENV["PASTEEE_APPKEY"]; nothing #hide
 
 # Create a paste that expires in one hour.
 
-id = Pasteee.paste(KEY, "Hola mundo"; expiration="3600")
+id = Pasteee.paste(appkey, "Hola mundo"; expiration="3600")
 
 # The paste can be retrieved using the returned `id`.
 
-paste = Pasteee.get(KEY, id)
+paste = Pasteee.get(appkey, id)
 
 # Paste.ee pastes are organized in sections.
 # Here we retrieve the contents of section number 1 of the paste we just created.
@@ -36,4 +36,4 @@ paste["sections"][1]["contents"]
 
 # Delete the paste.
 
-Pasteee.delete(KEY, id)
+Pasteee.delete(appkey, id)
