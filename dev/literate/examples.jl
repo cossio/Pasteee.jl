@@ -14,12 +14,13 @@ then click ACTIONS -> AUTHORIZATION PAGE, and then SUBMIT.
 You will see the Application Key.
 =#
 
+## The following line and its output need to be hidden to avoid exposing the key.
+const appkey = ENV["PASTEEE_APPKEY"]; nothing #hide
+
 #=
 In the following examples I assume that you have assigned your
 Application Key to the `appkey` variable.
 =#
-
-const appkey = ENV["PASTEEE_APPKEY"]; nothing #hide
 
 # Create a paste that expires in one hour.
 
