@@ -14,7 +14,6 @@ then click ACTIONS -> AUTHORIZATION PAGE, and then SUBMIT.
 You will see the Application Key.
 =#
 
-# The following line and its output need to be hidden to avoid exposing the key. #hide
 const appkey = ENV["PASTEEE_APPKEY"]; nothing #hide
 
 #=
