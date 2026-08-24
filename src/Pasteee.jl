@@ -95,9 +95,8 @@ Retrieve all pastes, organized in pages containing `perpage` entries.
 Returns entries in page number `page`.
 """
 function pastes(appkey::AbstractString; perpage::Int = 25, page::Int = 1)
-    headers = ["X-Auth-Token" => appkey, "Content-Type" => "application/json"]
-    data = Dict("perpage" => perpage, "page" => page)
-    response = HTTP.get("https://api.paste.ee/v1/pastes", headers, JSON.json(data))
+    headers = ["X-Auth-Token" => appkey]
+    response = HTTP.get("https://api.paste.ee/v1/pastes?perpage=$perpage&page=$page", headers)
     return JSON.parse(String(response.body))
 end
 
