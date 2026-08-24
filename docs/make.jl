@@ -55,8 +55,7 @@ Documenter.makedocs(
         "Home" => "index.md",
         "Examples" => "literate/examples.md",
         "Reference" => "reference.md"
-    ],
-    strict = true
+    ]
 )
 
 #=
