@@ -10,7 +10,7 @@ const appkey = ENV["PASTEEE_APPKEY"]
     @test paste["sections"][1]["contents"] == "Batido de mamey"
 
     Pasteee.delete(appkey, id)
-    @test_throws HTTP.ExceptionRequest.StatusError Pasteee.get(appkey, id)
+    @test_throws HTTP.StatusError Pasteee.get(appkey, id)
 
     pastes = Pasteee.pastes(appkey; perpage=12, page=2)
     @test pastes["current_page"] == 2
