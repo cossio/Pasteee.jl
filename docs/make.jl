@@ -36,11 +36,16 @@ Run Literate.jl on the .jl source files within docs/src/literate (recursively).
 For each .jl file, this creates a markdown .md file at the same location as
 and with the same name as the corresponding .jl file, but with the extension
 changed (.jl -> .md).
+
+The examples are rendered as plain ```julia blocks rather than executed
+@example blocks: running them needs a Paste.ee application key and a working
+Paste.ee API at build time, so the docs build would fail whenever the key is
+missing (as on Dependabot PRs, which get no secrets) or the service misbehaves.
 =#
 for (root, dirs, files) in walkdir(literate_dir)
     for file in files
         if endswith(file, ".jl")
-            Literate.markdown(joinpath(root, file), root; documenter=true)
+            Literate.markdown(joinpath(root, file), root; documenter=true, codefence="```julia" => "```")
         end
     end
 end
