@@ -21,9 +21,10 @@ jobs:
         with:
           version: ${{ matrix.version }}
       - uses: julia-actions/julia-buildpkg@e3eb439fad4f9aba7da2667e7510e4a46ebc46e1 # v1.7.0
+      # Hermetic: the tests run against an in-process mock of the Paste.ee API.
+      # PASTEEE_APPKEY is deliberately not passed here (Dependabot PRs get no
+      # secrets anyway); the live API is exercised by live-api.yml instead.
       - uses: julia-actions/julia-runtest@6e050c8013b833b1195105ff2fce9cd802f53271 # v1.12.0
-        env:
-          PASTEEE_APPKEY: ${{ secrets.PASTEEE_APPKEY }}
       - uses: julia-actions/julia-uploadcodecov@e08d3372fb1956ddcb29f6a8bbbdbc4985bc34b1 # v0.1.0
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

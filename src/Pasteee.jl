@@ -4,6 +4,13 @@ import HTTP
 import JSON
 
 """
+    API_URL
+
+Base URL of the Paste.ee API, held in a `Ref`. The tests point it at a local mock server.
+"""
+const API_URL = Ref("https://api.paste.ee/v1")
+
+"""
     Section(contents; name = "", syntax = "")
 
 Creates a paste `Section` with `contents`.
@@ -46,7 +53,7 @@ function paste(
     # if encrypted
     #     data["encrypted"] = true
     # end
-    response = HTTP.post("https://api.paste.ee/v1/pastes", headers, JSON.json(data))
+    response = HTTP.post("$(API_URL[])/pastes", headers, JSON.json(data))
     return JSON.parse(String(response.body))["id"]
 end
 
@@ -73,7 +80,7 @@ Deletes paste `id` from Paste.ee.
 """
 function delete(appkey::AbstractString, id::AbstractString)
     headers = ["X-Auth-Token" => appkey]
-    HTTP.request("DELETE", "https://api.paste.ee/v1/pastes/$id", headers)
+    HTTP.request("DELETE", "$(API_URL[])/pastes/$id", headers)
     return nothing
 end
 
@@ -84,7 +91,7 @@ Fetch paste `id` from Paste.ee.
 """
 function get(appkey::AbstractString, id::AbstractString)
     headers = ["X-Auth-Token" => appkey]
-    response = HTTP.get("https://api.paste.ee/v1/pastes/$id", headers)
+    response = HTTP.get("$(API_URL[])/pastes/$id", headers)
     return JSON.parse(String(response.body))["paste"]
 end
 
@@ -96,7 +103,7 @@ Returns entries in page number `page`.
 """
 function pastes(appkey::AbstractString; perpage::Int = 25, page::Int = 1)
     headers = ["X-Auth-Token" => appkey]
-    response = HTTP.get("https://api.paste.ee/v1/pastes?perpage=$perpage&page=$page", headers)
+    response = HTTP.get("$(API_URL[])/pastes?perpage=$perpage&page=$page", headers)
     return JSON.parse(String(response.body))
 end
 
